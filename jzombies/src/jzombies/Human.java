@@ -3,7 +3,9 @@
  */
 package jzombies;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import repast.simphony.engine.watcher.Watch;
 import repast.simphony.engine.watcher.WatcherTriggerSchedule;
@@ -22,16 +24,26 @@ import repast.simphony.util.SimUtilities;
  */
 public class Human {
 
-	private ContinuousSpace<Object> space;
-	private Grid<Object> grid;
-	private int energy, startingEnergy;
+	protected ContinuousSpace<Object> space;
+	protected Grid<Object> grid;
 	
-	public Human(ContinuousSpace<Object> space, Grid<Object>grid, int energy) {
+	// Internal counter
+	protected int humanID;
+	protected Map<Integer,String> history = new HashMap<>();
+	
+	static private int humanCensus = 0;
+	
+	public Human(ContinuousSpace<Object> space, Grid<Object>grid, int id) {
 		this.space = space;
 		this.grid = grid;
-		this.energy = startingEnergy = energy;
+		this.humanID = id;
 	}
 	
+	public Human(ContinuousSpace<Object> space, Grid<Object>grid) {
+		this(space, grid, ++humanCensus);
+	}
+	
+
 	@Watch(watcheeClassName="jzombies.Zombie",
 			watcheeFieldNames="moved",
 			query="within_moore 1",
@@ -52,11 +64,13 @@ public class Human {
 				minCount = cell.size();
 			}
 		}
+		/*
 		if (energy > 0) {
 			moveTowards(pointWithLeastZombies);
 		} else {
 			energy = startingEnergy;
 		}
+		*/
 	}
 	
 	public void moveTowards(GridPoint pt) {
@@ -68,7 +82,7 @@ public class Human {
 			space.moveByVector(this, 2, angle, 0);
 			myPoint = space.getLocation(this);
 			grid.moveTo(this, (int)myPoint.getX(), (int)myPoint.getY());
-			energy--;
+			//energy--;
 		}
 	}
 }
