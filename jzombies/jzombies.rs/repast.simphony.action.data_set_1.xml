@@ -17,17 +17,17 @@
   <methodDataSources class="linked-hash-map"/>
   <countSources class="linked-hash-map">
     <entry>
-      <string>Human Count</string>
+      <string>Susceptible Count</string>
       <repast.simphony.data2.engine.CountSourceDefinition>
-        <typeName>jzombies.Human</typeName>
-        <id>Human Count</id>
+        <typeName>jzombies.Susceptible</typeName>
+        <id>Susceptible Count</id>
       </repast.simphony.data2.engine.CountSourceDefinition>
     </entry>
     <entry>
-      <string>Zombie Count</string>
+      <string>Infected Count</string>
       <repast.simphony.data2.engine.CountSourceDefinition>
-        <typeName>jzombies.Zombie</typeName>
-        <id>Zombie Count</id>
+        <typeName>jzombies.Infected</typeName>
+        <id>Infected Count</id>
       </repast.simphony.data2.engine.CountSourceDefinition>
     </entry>
   </countSources>

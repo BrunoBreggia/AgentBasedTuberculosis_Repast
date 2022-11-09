@@ -39,18 +39,20 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 		Grid <Object> grid = gridFactory.createGrid("grid", context,
 													new GridBuilderParameters<Object>(new WrapAroundBorders(), new SimpleGridAdder<Object>(), true, 50, 50));
 		
+		// Populate with susceptible people
 		Parameters params = RunEnvironment.getInstance().getParameters();
-		int zombieCount = params.getInteger("zombie_count");
-		for (int i=0; i<zombieCount; i++) {
-			context.add(new Zombie(space, grid));
+		int susceptibleCount = params.getInteger("susceptible_count");
+		for (int i=0; i<susceptibleCount; i++) {
+			context.add(new Susceptible(space, grid));
 		}
 		
-		int humanCount = params.getInteger("human_count");
-		for (int i=0; i<humanCount; i++) {
-			int energy = RandomHelper.nextIntFromTo(4, 10);
-			context.add(new Human(space, grid, energy));
+		// Populate with infected people
+		int infectedCount = params.getInteger("infected_count");
+		for (int i=0; i<infectedCount; i++) {
+			context.add(new Infected(space, grid));
 		}
 		
+		// Update the grid location of the agents
 		for (Object obj : context) {
 			NdPoint pt = space.getLocation(obj);
 			grid.moveTo(obj, (int)pt.getX(), (int)pt.getY());

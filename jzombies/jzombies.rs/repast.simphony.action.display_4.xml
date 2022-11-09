@@ -3,22 +3,22 @@
   <type>2D</type>
   <styles>
     <entry>
-      <string>jzombies.Zombie</string>
-      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+      <string>jzombies.Susceptible</string>
+      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
     </entry>
     <entry>
-      <string>jzombies.Human</string>
-      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+      <string>jzombies.Infected</string>
+      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
     </entry>
   </styles>
   <editedStyles>
     <entry>
-      <string>jzombies.Zombie</string>
-      <string>jzombies.Zombie.style_1.xml</string>
+      <string>jzombies.Susceptible</string>
+      <null/>
     </entry>
     <entry>
-      <string>jzombies.Human</string>
-      <string>jzombies.Human.style_1.xml</string>
+      <string>jzombies.Infected</string>
+      <null/>
     </entry>
   </editedStyles>
   <netStyles>
@@ -41,19 +41,19 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1644830964</hashCode>
+    <hashCode>-846161178</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>space</layoutProjection>
   <layoutInterval>0</layoutInterval>
   <layerOrder>
     <entry>
-      <string>jzombies.Zombie</string>
-      <int>1</int>
+      <string>jzombies.Susceptible</string>
+      <int>0</int>
     </entry>
     <entry>
-      <string>jzombies.Human</string>
-      <int>0</int>
+      <string>jzombies.Infected</string>
+      <int>1</int>
     </entry>
   </layerOrder>
   <projections>

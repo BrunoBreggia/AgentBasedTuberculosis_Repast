@@ -5,7 +5,7 @@
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 											/>
-				<parameter name="zombie_count" displayName="Zombie Count" type="int" 
+				<parameter name="infected_count" displayName="Infected count" type="int" 
 						defaultValue="5" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"

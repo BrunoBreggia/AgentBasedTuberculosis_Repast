@@ -5,8 +5,8 @@
   <format>TABULAR</format>
   <sourceIds class="linked-hash-set">
     <string>tick</string>
-    <string>Zombie Count</string>
-    <string>Human Count</string>
+    <string>Susceptible Count</string>
+    <string>Infected Count</string>
   </sourceIds>
   <fileName>ModelOutput.txt</fileName>
   <addTimeStamp>true</addTimeStamp>
