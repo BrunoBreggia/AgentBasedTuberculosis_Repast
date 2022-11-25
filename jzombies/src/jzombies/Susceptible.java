@@ -3,8 +3,12 @@
  */
 package jzombies;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import geocovid.DataSet;
+import geocovid.agents.BuildingAgent;
 import repast.simphony.engine.schedule.ISchedule;
 import repast.simphony.engine.watcher.Watch;
 import repast.simphony.engine.watcher.WatcherTriggerSchedule;
@@ -24,8 +28,16 @@ import repast.simphony.util.SimUtilities;
  */
 public class Susceptible extends Human {
 	
+	// attributes
 	private ISchedule schedule;
 	static private String tag = "susceptible";
+	private Map<Integer, Integer> socialInteractions = new HashMap<>();
+	/** Indice estado de markov donde esta (0 es la casa, 1 es el trabajo/estudio, 2 es ocio, 3 es otros) */
+	private int currentState = 0;
+	/** Ubicacion actual dentro de parcela o null si afuera*/ 
+	private int[] currentPosition = {0,0};
+	/** Parcela actual o null si en exterior */
+	private BuildingAgent currentBuilding = null;
 
 	public Susceptible(ContinuousSpace<Object> space, Grid<Object> grid) {
 		// Call the superclass constructor
@@ -76,5 +88,51 @@ public class Susceptible extends Human {
 			grid.moveTo(this, (int)myPoint.getX(), (int)myPoint.getY());
 		}
 	}
+	
+	/**
+	 * Aumenta cantidad de contactos con el humano de la Id dada.
+	 * @param humanId id HumanAgent
+	 */
+	public void addSocialInteraction(int humanId) {
+		// Aca uso la ID del humano como key, por si se quiere saber cuantos contactos se repiten
+		if (socialInteractions.containsKey(humanId))
+			socialInteractions.put(humanId, socialInteractions.get(humanId) + 1);
+		else
+			socialInteractions.put(humanId, 1);
+	}
+	
+	/**
+	 * Informa la cantidad de contactos en el dia y reinicia el Map.
+	 * @see DataSet#COUNT_UNIQUE_INTERACTIONS
+	 * @return contactos personales diarios
+	 */
+	public int getSocialInteractions() {
+		int count = 0;
+		if (DataSet.COUNT_UNIQUE_INTERACTIONS) {
+			count = socialInteractions.size();
+		}
+		else {
+			for (Object value : socialInteractions.values())
+				count += (Integer)value;
+		}
+		socialInteractions.clear();
+		return count;
+	}
+	
+	/**
+	 * Re-ingresa al contexto al salir de UTI.
+	 */
+	public void addRecoveredToContext() {
+		// Si esta hospitalizado o vive afuera no vuelve a entrar
+		if (hospitalized)
+			return;
+		context.add(this);
+		
+		currentState = 0;
+		currentPosition = homePlace.insertHuman(this);
+		currentBuilding = homePlace;
+		// switchLocation();
+	}
+	
 	
 }
