@@ -50,10 +50,10 @@ public class Susceptible extends Human {
 	/**
 	 * Susceptible gets infected
 	 */
-	public Infected getInfected() {
-		Infected infected = new Infected(this);
-		return infected;
-	}
+	//public Infected getInfected() {
+	//	Infected infected = new Infected(this);
+	//	return infected;
+	//}
 
 	@Watch(watcheeClassName="jzombies.Infected",
 			watcheeFieldNames="moved",
